@@ -1,0 +1,552 @@
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="icon" type="image/png" href="https://raunak1089.github.io/Required-files/Inferencia/logo-removebg_4KB.png">
+<title>Stat Cipher</title>
+<script src="https://raunak1089.github.io/all_scripts/fontawesome.js"></script>
+<script
+id="MathJax-script"
+async
+src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"
+></script>
+
+<style>
+    @import url('https://fonts.googleapis.com/css?family=Vollkorn:400,500,600,700&display=swap');
+    @import url('https://fonts.googleapis.com/css?family=Caprasimo:400,500,600,700&display=swap');
+    @import url('https://fonts.googleapis.com/css?family=Tangerine:400,500,600,700&display=swap');
+    @import url('https://fonts.googleapis.com/css?family=Elsie Swash Caps:400,500,600,700&display=swap');
+    body {
+        font-family: Arial, sans-serif;
+        background-color: #f0f0f0;
+        margin: 0;
+        padding: 0;
+        user-select: none;
+    }
+
+    .head-bar {
+        background-image: url(https://raunak1089.github.io/Required-files/treasure-bg-remove.png);
+        background-size: 30%;
+        background-repeat: no-repeat;
+        background-position: center 60%;
+        color: white;
+        background-color: #da8e35;
+        padding: 10px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        cursor: pointer;
+    }
+
+    #start-button {
+        width: fit-content;
+        height: 2em;
+        position: fixed;
+        padding: 5 20px;
+        color: #896115;
+        font-family: Caprasimo;
+        background: white;
+        box-shadow: inset 0px 0px 10px 2px goldenrod;
+        border-radius: 10px;
+        display: flex;
+        font-size: 1.5em;
+        opacity: 0.7;
+        cursor: pointer;
+        flex: 1 1 0%;
+        z-index: 1;
+        align-items: center;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%) scale(1.5);
+        transition: 1s;
+    }
+
+    #start-button:hover {
+        border: 4px solid #896115;
+    }
+    
+    instr li {
+        margin: 3px 0;
+        font-size: 0.8em;
+        font-family: Elsie Swash Caps;
+    }
+
+    instr h1 {
+        font-family: Tangerine;
+        font-size: 4.5em;
+        line-height: 0em;
+    }
+    
+    .head-bar span {
+        font-family: Elsie Swash Caps;
+        margin-right: -50%;
+        font-size: 1.5em;
+    }
+
+    .hearts {
+        font-size: 24px;
+        color: red;
+        flex-direction: row;
+        display: flex;
+    }
+/*
+    .cipher, .decipher {
+        font-size: 2.5em;
+        margin-left: 80%;
+        color: #896115;
+        flex-direction: row;
+        display: flex;
+        font-weight: bolder;
+    }
+
+    .cipher div, .decipher div {
+        margin: 10px;
+        text-align: center;
+    }
+*/
+
+    .hearts i {
+        margin: 3px;
+    }
+
+    .foot-bar {
+        background-color: #333;
+        color: white;
+        padding: 10px;
+        text-align: center;
+        position: fixed;
+        bottom: 0;
+        width: 100%;
+    }
+
+    .container {
+        height: 61.9vh;
+        display: flex;
+        flex-direction: column;
+        flex-wrap: wrap;
+        justify-content: center;
+        align-items: center;
+        background: radial-gradient(#fee77c, #cb6817);
+    }
+
+    /* @keyframes appear {
+        from {
+            opacity: 0;
+            transform: rotateX(90deg);
+        }
+        to {
+            opacity: 1;
+            transform: rotateX(0deg);
+        }
+    } */
+
+    table {
+        border-spacing: 7px;
+        margin-top: 0%;
+        font-family: Vollkorn;
+        transition: 0.8s ease;
+    }
+
+    .gameAppear {
+        transform: scale(1) !important;
+    }
+
+    td {
+        text-align: center;
+        width: 80px;
+        height: 80px;
+        cursor: pointer;
+        border-radius: 10px;
+        box-shadow: inset 0px 0px 10px 2px #b43e1d;
+        font-weight: bolder;
+        color: #896115;
+        font-size: 1.5em;
+        transform: scale(0);
+        transition: 0.8s ease;
+        /* animation: appear 1s forwards cubic-bezier(0.61, 1.61, 0.67, 1.15); */
+    }
+
+    .disappear{
+        transform: translate(-50%, -50%) scale(100) !important;
+        opacity: 0 !important;
+    }
+
+    
+</style>
+</head>
+<body>
+
+
+
+<div class="head-bar">
+    <instr>
+        <h1>Stat Cipher</h1>
+        <ul>
+        <li>Discover the elusive treasure behind the correct door.</li>
+        <li>To progress, uncover the preceding clue that unveils the key to the next one.</li>
+        <li>Mind that several doors hides the same clue.<br> So you can skip a clue with a random lucky guess too!</li>
+        <li>Opening a door without a clue results in loss of a life.</li>
+        <li>You have 3 lives to use for the entire journey.</li>
+        <li>There are 6 clues in total.<br> But a lucky guess can lead you to the treasure in much fewer steps!</li>
+        <li>For each correct door you open, 5 points will be awareded.<br> Lucky guesses don't award any points!</li>
+        <li>If you unlock the treasure door, 15 extra points will be awarded.</li>
+        <li>You have 15 mins only, collect your treasure as fast as you can!</li>
+        </ul>
+</instr>
+    <!--
+    <div style="display: flex; flex-direction: column;">
+    <div class="cipher"></div>
+    <div class="decipher"></div>
+    </div>
+    -->
+   <span>Time left</span><span>:</span><span id="countdown">15:00</span>
+    <div class="hearts" title="3 lives left"></div>
+</div>
+
+<div class="container" id="container">
+</div>
+
+<div id="starter"></div>
+<div id="start-button" onclick='start()' title="Start exploring!">Start</div>
+
+<div hidden class="foot-bar" id="footBar">
+    Hint question
+</div>
+
+<questions hidden>
+<qn1>
+    \(\text{Let } f(x)=x^2-2x-36\) 
+    \(\text{such that}\) 
+    \[ f(x)+k \]
+    \(\text{has one real root.}\)
+    \(\text{Find } k.\)
+</qn1>
+
+<qn2>
+    \(\text{Let } f(x) = \begin{cases} 3x^3-7x^2+17x-8, & \text{if } x \in \mathbb{Q} \\ 2x^3 + 2x^2-12x+12, & \text{if } x \in \mathbb{Q}^C \end{cases} \)
+    \(\text{Let } A \text{ be a } 3 \times 3 \text{ matrix with eigenvalues equal to the &#8220;points of continuities&#8221; of } f(x)\).
+    \(\text{Find } \text{trace}(60A^{-1})\).
+</qn2>
+
+<qn3>
+    \(\text{Let } X \sim U\left(-\frac{\pi}{2}, \frac{\pi}{2}\right)\).
+    \(Y \sim \tan(X)\).
+    \(\text{Consider } Z = \frac{1}{Y} + 5\).
+    \[\text{Find the median of } Z\].
+</qn3>
+
+<qn4>
+    \(\text{Let } X \text{ be a random variable having a continuous distribution function.}\)
+    \(\text{Given } \frac{F'(x)}{1 - F(x)} = k, \text{where } F(x) \text{ is the distribution function of } X \)
+    \(\text{and } V(X) = 16\).
+    \(\text{Let } Y = \sum_{i=1}^{13} X_i\).
+    \(\text{Find } E(Y)\).
+</qn4>
+
+<qn5>
+    \(\text{Let } n \text{ be the 3rd prime number. Consider an } n \times n \text{ matrix } A\).
+    \(\text{Let } B = A - A^T\).
+    \(\text{Let } C \text{ be a matrix of rank } n - 1\).
+    \(\text{Let } z = \det(B) + \text{rank}(\text{adj}(C))\).
+    \(\text{Find } 12z\).
+</qn5>
+
+<qn6>
+    \(\text{Suppose there are 10 observations.}\)
+    \(\text{The first 3 observations are } 6, 8, 13 \text{ and the sum of the remaining 7 observations is } 63\).
+    \(\text{Let the mode be } 12\).
+    \(\text{Find the median.}\)
+</qn6>
+
+
+</questions>
+
+<script>
+
+
+document.addEventListener('keydown', function(event) {
+    if (event.keyCode === 71) {
+        gameOver('force-shutdown');
+    }
+});
+
+
+    let lives = 3;
+    for(let i=0; i<lives; i++) document.querySelector('.hearts').innerHTML += '<i class="fas fa-heart"></i>';
+//    for(let i of 'CIPHER') document.querySelector('.cipher').innerHTML += '<div>'+i+'</div>';
+//    for(let i of [3,4,14,6,7,9]) document.querySelector('.decipher').innerHTML += '<div>'+i+'</div>';
+
+    // Function to create the table dynamically
+    function createTreasureTable(rows, cols) {
+        var container = document.getElementById('container');
+        var table = document.createElement('table');
+        
+        for (var i = 0; i < rows; i++) {
+            var row = table.insertRow();
+            for (var j = 0; j < cols; j++) {
+                var cell = row.insertCell();
+                cell.textContent = i * cols + j + 1;
+                cell.setAttribute('onclick', 'proceedToNextRoom(this)');
+                cell.title = 'Open door ' + (i * cols + j + 1);
+                cell.style.transitionDelay = (2 * Math.random())+'s';
+            }
+        }
+        
+        container.appendChild(table);
+    }
+
+    createTreasureTable(6, 15);
+
+
+    const questionArray = [
+        document.querySelector('qn1').textContent,
+        document.querySelector('qn2').textContent,
+        document.querySelector('qn3').textContent,
+        document.querySelector('qn4').textContent,
+        document.querySelector('qn5').textContent,
+        document.querySelector('qn6').textContent
+    ];
+
+    const answers = [37, 87, 5, 52, 12, 10];
+
+    let options = 6;
+
+    function getRandomInt(min, max) {
+        return Math.floor(Math.random() * (max - min + 1)) + min;
+    }
+
+    function generateRandomIntegers(amount) {
+        const excludedNumbers = new Set(answers);
+        const result = [];
+
+        while (result.length < amount) {
+            const randomNumber = getRandomInt(1, 90);
+            if (!excludedNumbers.has(randomNumber) && !result.includes(randomNumber)) {
+            result.push(randomNumber);
+            }
+        }
+
+        return result;
+    }
+
+    function generateRandomAnsArray() {
+        const randomIntegers = generateRandomIntegers((answers.length-1) * (options-1));
+        const RandomAnsArray = [];
+
+        for (let i = 0; i < answers.length-1; i++) {
+            const startIndex = i * (options-1);
+            const endIndex = startIndex + (options-1);
+            const subArray = randomIntegers.slice(startIndex, endIndex);
+            subArray.push(answers[i]);
+            RandomAnsArray.push(subArray);
+        }
+
+        return RandomAnsArray;
+    }
+
+    const RandomAnsArray = generateRandomAnsArray();
+    console.log(RandomAnsArray);
+
+
+
+
+
+    let wrongAttempts = 0;
+    let score = 0;
+    let isRoomsActive = false;
+
+    function start() {
+        isRoomsActive=true; 
+        document.querySelector('#start-button').classList.add('disappear');
+        document.querySelectorAll('td').forEach(room => {
+            room.classList.add('gameAppear');
+        });
+        setTimeout(()=>{
+            alertMessage("<div style='font-size: 1.5em;font-weight: bolder;'>First Clue:</div>"+questionArray[0], "#e8d4a1", "#896115");
+            document.querySelector('#start-button').remove();
+            document.querySelectorAll('td').forEach(cell => {
+                cell.style.transitionDelay = '0s';
+            });
+            startCountdown();
+        },3000); 
+    }
+
+
+    function proceedToNextRoom(currentRoom) {
+    if(isRoomsActive){
+        let roomNo = Number(currentRoom.innerText);
+        // if (RandomAnsArray[turn].includes(roomNo)) {
+        //     turn++;
+        //     currentRoom.style.color = '#40ff40';
+        //     currentRoom.style.boxShadow = 'inset 0px 0px 10px 2px #40ff40';
+        //     if (turn==answers.length) gameOver();
+        //     else alertMessage(`<div style='font-size: 1.5em;font-weight: bolder;'>Clue at door ${roomNo}:</div>`+questionArray[turn], "#e8d4a1", "#896115");
+        // } else if (answers.slice(0,turn).includes(roomNo)) {
+        //     let thisQn = 1 + answers.indexOf(roomNo);
+        //     alertMessage(`<div style='font-size: 1.5em;font-weight: bolder;'>Clue at door ${roomNo}:</div>`+questionArray[thisQn], "#e8d4a1", "#896115");
+        // } else {
+        //     wrongAttempts++;
+        //     alertMessage("<div style='font-size: 1.5em;font-weight: bolder;'>No clues here!</div>Oops! You opened the wrong door.", "#e74c3c");
+        //     currentRoom.style.color = '#e74c3c';
+        //     currentRoom.style.boxShadow = 'inset 0px 0px 10px 2px #e74c3c';
+        //     document.querySelector('.hearts').title = `${lives-wrongAttempts} lives left`;
+        //     document.querySelector('.hearts').children[wrongAttempts - 1].classList.replace('fas', 'fal');
+        //     if(wrongAttempts==lives) gameOver();
+        // }
+        if (eval('['+RandomAnsArray.toString()+']').concat([answers[answers.length-1]]).includes(roomNo)){
+            currentRoom.style.color = '#40ff40';
+            currentRoom.style.boxShadow = 'inset 0px 0px 10px 2px #40ff40';
+            if (answers.includes(roomNo)) score += 5;
+            let turn = 1 + Math.floor(eval('['+RandomAnsArray.toString()+']').indexOf(roomNo)/6);
+            if (roomNo == answers[answers.length-1]) {score += 15; gameOver('win');}
+            else alertMessage(`<div style='font-size: 1.5em;font-weight: bolder;'>Clue at door ${roomNo}:</div>`+questionArray[turn], "#e8d4a1", "#896115");
+        } else {
+            wrongAttempts++;
+            alertMessage("<div style='font-size: 1.5em;font-weight: bolder;'>No clues here!</div>Oops! You opened the wrong door.", "#e74c3c");
+            currentRoom.style.color = '#e74c3c';
+            currentRoom.style.boxShadow = 'inset 0px 0px 10px 2px #e74c3c';
+            document.querySelector('.hearts').title = `${lives-wrongAttempts} lives left`;
+            document.querySelector('.hearts').children[wrongAttempts - 1].classList.replace('fas', 'fal');
+            if(wrongAttempts==lives) gameOver('lifeOver');
+        }
+    }
+    }
+
+    const preloadImage = new Image();
+    preloadImage.src = "https://raunak1089.github.io/Required-files/treasure.png";
+
+    function gameOver(cause) {
+        document.querySelectorAll('td').forEach(room => {
+            room.onclick = null;
+        });
+        clearInterval(countdownInterval);
+
+        let congo = `
+        <img src="https://raunak1089.github.io/Required-files/treasure.png"><span style="
+            font-family: Caprasimo;
+            color: #ffee00;
+            display: flex;
+            justify-content: center;
+            font-size: 1.5em;
+        ">Congratulations!</span>
+        `;
+
+        cause == 'win' ? alertMessage(congo, "radial-gradient(#fde57b, #d46721)", "#ffee00") : 
+        cause == 'time-up' ? alertMessage(`<div style='font-size: 1.5em;font-weight: bolder;'>Time over!</div>Oops! Time is up.\nYour score is ${score}`, "#e74c3c") :
+        cause == 'lifeOver' ?  alertMessage(`<div style='font-size: 1.5em;font-weight: bolder;'>No clues here!</div>Oops! You're out of lives.\nYour score is ${score}`, "#e74c3c") :
+        alertMessage(`<div style='font-size: 1.5em;font-weight: bolder;'>Force Shut Down!</div>The game was forcefully shut down by pressing G key.\nYour score is ${score}`, "#e74c3c");
+
+        document.addEventListener('keydown', function(event) {
+            if (event.keyCode === 83) {
+                alert("SCORE : " + score);
+            }
+        });
+    }
+
+
+//  COUNTDOWN _________________________
+
+let countdownInterval;
+
+function startCountdown() {
+    var countdownElement = document.getElementById('countdown');
+    var time = 900; 
+
+    countdownInterval = setInterval(function() {
+        var minutes = Math.floor(time / 60);
+        var seconds = time % 60;
+
+        // Add leading zero if needed
+        var displayMinutes = minutes < 10 ? '0' + minutes : minutes;
+        var displaySeconds = seconds < 10 ? '0' + seconds : seconds;
+
+        countdownElement.innerText = displayMinutes + ':' + displaySeconds;
+
+        if (time <= 0) {
+            clearInterval(countdownInterval);
+            countdownElement.innerText = '00:00';
+            gameOver('time-up');
+        } else {
+            time--;
+        }
+    }, 1000);
+}
+
+
+//  ALERT MESSAGE BOX AT CENTER OF PAGE  _____________________________________________________________________________
+
+    let alertBoxCSS = `
+    /* Alert Box Styles */
+        .alert-box {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-family: Elsie Swash Caps;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+            display: none;
+            animation: popMsg 0.5s forwards cubic-bezier(0.61, 1.61, 0.67, 1.15);
+        }
+
+        @keyframes popMsg {
+            from {
+                transform: translate(-50%, -50%) scale(0);
+            }
+            to {
+                transform: translate(-50%, -50%) scale(1);
+            }
+        }
+
+        .close-btn {
+            position: absolute;
+            top: 5px;
+            right: 5px;
+            cursor: pointer;
+            font-size: larger;
+            font-weight: bold;
+            border-radius: 1em;
+            padding: 3px 5px;
+        }
+
+        .close-btn:hover {
+            background: red;
+            color: white;
+        }
+    `;
+
+    let alertStyle = document.createElement('style');
+    alertStyle.innerHTML = alertBoxCSS;
+    document.head.appendChild(alertStyle);
+
+    let alertBoxDiv = document.createElement('div');
+    alertBoxDiv.id = 'alertBox';
+    alertBoxDiv.classList.add('alert-box');
+    alertBoxDiv.innerHTML = `
+        <msg>Alert message.</msg>
+        <span class="close-btn" onclick="closeAlert()" title="Close"><i class="fa-regular fa-xmark"></i></span>
+    `;
+    document.body.appendChild(alertBoxDiv);
+
+
+    function alertMessage(message, bg="#3498db", color="white") {
+        isRoomsActive = false;
+        document.querySelector('#alertBox').style.display = 'block';
+        document.querySelector('#alertBox').style.background = bg;
+        document.querySelector('#alertBox').style.color = color;
+        document.querySelector('#alertBox msg').innerHTML = message;
+        MathJax.typeset();
+    }
+
+    function closeAlert() {
+        document.getElementById('alertBox').style.display = 'none';
+        isRoomsActive = true;
+    }
+
+
+
+</script>
+
+</body>
+</html>
