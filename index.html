@@ -356,6 +356,7 @@ document.addEventListener('keydown', function(event) {
     let isRoomsActive = false;
 
     function start() {
+        document.documentElement.requestFullscreen();
         isRoomsActive=true; 
         document.querySelector('#start-button').classList.add('disappear');
         document.querySelectorAll('td').forEach(room => {
