@@ -189,7 +189,7 @@ src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"
         <li>You have 3 lives to use for the entire journey.</li>
         <li>There are 6 clues in total.<br> But a lucky guess can lead you to the treasure in much fewer steps!</li>
         <li>For each correct door you open, 5 points will be awareded.<br> Lucky guesses don't award any points!</li>
-        <li>If you unlock the treasure door, 15 extra points will be awarded.</li>
+        <li>If you unlock the treasure door, 10 extra points will be awarded.</li>
         <li>You have 15 mins only, collect your treasure as fast as you can!</li>
         </ul>
 </instr>
@@ -399,7 +399,7 @@ document.addEventListener('keydown', function(event) {
             currentRoom.style.boxShadow = 'inset 0px 0px 10px 2px #40ff40';
             if (answers.includes(roomNo)) score += 5;
             let turn = 1 + Math.floor(eval('['+RandomAnsArray.toString()+']').indexOf(roomNo)/6);
-            if (roomNo == answers[answers.length-1]) {score += 15; gameOver('win');}
+            if (roomNo == answers[answers.length-1]) {score += 10; gameOver('win');}
             else alertMessage(`<div style='font-size: 1.5em;font-weight: bolder;'>Clue at door ${roomNo}:</div>`+questionArray[turn], "#e8d4a1", "#896115");
         } else {
             wrongAttempts++;
