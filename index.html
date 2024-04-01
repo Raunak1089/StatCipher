@@ -423,6 +423,13 @@ document.addEventListener('keydown', function(event) {
         clearInterval(countdownInterval);
 
         let congo = `
+        <span style="
+            font-family: Caprasimo;
+            color: #ffee00;
+            display: flex;
+            justify-content: center;
+            font-size: 1.5em;
+        ">Game Over</span>
         <img src="https://raunak1089.github.io/Required-files/treasure.png" style="margin-left: 50%;transform: translateX(-50%);">
         <span style="
             font-family: Caprasimo;
@@ -438,6 +445,13 @@ document.addEventListener('keydown', function(event) {
             justify-content: center;
             font-size: 1.5em;
         ">You found the treasure!!</span>
+        <span style="
+            font-family: Caprasimo;
+            color: #ffee00;
+            display: flex;
+            justify-content: center;
+            font-size: 1.5em;
+        ">Your score is ${score}</span>
         `;
 
         cause == 'win' ? alertMessage(congo, "radial-gradient(#fde57b, #d46721)", "#ffee00") : 
