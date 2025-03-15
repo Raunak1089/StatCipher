@@ -1,8 +1,9 @@
+
 <html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<link rel="icon" type="image/png" href="https://raunak1089.github.io/Required-files/Inferencia/logo-removebg_4KB.png">
+<link rel="icon" sizes="192x192" href="https://stochastico2025.github.io/Home/stochastico-logo_162KB.png">
 <title>Stat Cipher</title>
 <script src="https://raunak1089.github.io/all_scripts/fontawesome.js"></script>
 <script
@@ -96,6 +97,7 @@ src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"
         color: red;
         flex-direction: row;
         display: flex;
+        animation: beat_heart 1s infinite;
     }
 /*
     .cipher, .decipher {
@@ -168,6 +170,26 @@ src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"
         opacity: 0 !important;
     }
 
+    #logo {
+        width: 8em;
+        position: absolute;
+        top: 1em;
+        left: 50%;
+        transform: translate(-50%, 0px);
+        animation: beat_logo 2s infinite;
+    }
+
+    @keyframes beat_logo {
+        0% { transform: translate(-50%, 0px) scale(1); }
+        50% { transform: translate(-50%, 0px) scale(0.9); }
+        100% { transform: translate(-50%, 0px) scale(1); }
+    }
+    @keyframes beat_heart {
+        0% { transform: scale(1); }
+        50% { transform: scale(0.9); }
+        100% { transform: scale(1); }
+    }
+
     
 </style>
 </head>
@@ -189,6 +211,8 @@ src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"
         <li>You have 15 mins only, collect your treasure as fast as you can!</li>
         </ul>
 		</instr>
+
+    <img id="logo" src="https://stochastico2025.github.io/Home/stochastico-logo.PNG" alt="StoChastico Logo">
 
     <div>
     <div>Time left</div><div>:</div><div id="countdown">15:00</div>
