@@ -285,7 +285,7 @@ document.addEventListener('keydown', function(event) {
 
 
     let lives = 3;
-    for(let i=0; i<lives; i++) document.querySelector('.hearts').innerHTML += '<i class="fas fa-heart"></i>';
+    for(let i=0; i<lives; i++) document.querySelector('.hearts').innerHTML += '<i class="fa-solid fa-heart"></i>';
 //    for(let i of 'CIPHER') document.querySelector('.cipher').innerHTML += '<div>'+i+'</div>';
 //    for(let i of [3,4,14,6,7,9]) document.querySelector('.decipher').innerHTML += '<div>'+i+'</div>';
 
@@ -404,7 +404,7 @@ document.addEventListener('keydown', function(event) {
         //     currentRoom.style.color = '#e74c3c';
         //     currentRoom.style.boxShadow = 'inset 0px 0px 10px 2px #e74c3c';
         //     document.querySelector('.hearts').title = `${lives-wrongAttempts} lives left`;
-        //     document.querySelector('.hearts').children[wrongAttempts - 1].classList.replace('fas', 'fal');
+        //     document.querySelector('.hearts').children[wrongAttempts - 1].classList.replace('fa-solid fa-heart', 'fa-regular fa-heart');
         //     if(wrongAttempts==lives) gameOver();
         // }
         if (eval('['+RandomAnsArray.toString()+']').concat([answers[answers.length-1]]).includes(roomNo)){
@@ -420,7 +420,7 @@ document.addEventListener('keydown', function(event) {
             currentRoom.style.color = '#e74c3c';
             currentRoom.style.boxShadow = 'inset 0px 0px 10px 2px #e74c3c';
             document.querySelector('.hearts').title = `${lives-wrongAttempts} lives left`;
-            document.querySelector('.hearts').children[wrongAttempts - 1].classList.replace('fas', 'fal');
+            document.querySelector('.hearts').children[wrongAttempts - 1].classList.replace('fa-solid fa-heart', 'fa-regular fa-heart');
             if(wrongAttempts==lives) gameOver('lifeOver');
         }
     }
