@@ -404,7 +404,7 @@ document.addEventListener('keydown', function(event) {
         //     currentRoom.style.color = '#e74c3c';
         //     currentRoom.style.boxShadow = 'inset 0px 0px 10px 2px #e74c3c';
         //     document.querySelector('.hearts').title = `${lives-wrongAttempts} lives left`;
-        //     document.querySelector('.hearts').children[wrongAttempts - 1].classList.replace('fa-solid fa-heart', 'fa-regular fa-heart');
+        //     document.querySelector('.hearts').children[wrongAttempts - 1].classList.replace('fa-solid', 'fa-regular');
         //     if(wrongAttempts==lives) gameOver();
         // }
         if (eval('['+RandomAnsArray.toString()+']').concat([answers[answers.length-1]]).includes(roomNo)){
@@ -420,7 +420,7 @@ document.addEventListener('keydown', function(event) {
             currentRoom.style.color = '#e74c3c';
             currentRoom.style.boxShadow = 'inset 0px 0px 10px 2px #e74c3c';
             document.querySelector('.hearts').title = `${lives-wrongAttempts} lives left`;
-            document.querySelector('.hearts').children[wrongAttempts - 1].classList.replace('fa-solid fa-heart', 'fa-regular fa-heart');
+            document.querySelector('.hearts').children[wrongAttempts - 1].classList.replace('fa-solid', 'fa-regular');
             if(wrongAttempts==lives) gameOver('lifeOver');
         }
     }
